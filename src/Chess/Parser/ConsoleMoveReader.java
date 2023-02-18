@@ -19,7 +19,7 @@ public class ConsoleMoveReader {
     public static Cell readCell(String str) throws IllegalAccessException {
         if (str.length() != 2)
             throw new IllegalAccessException();
-        return new Cell((int)'h' - (int)str.charAt(0), Character.getNumericValue(str.charAt(1)));
+        return new Cell((int)str.charAt(0) - (int)'a', Character.getNumericValue(str.charAt(1)));
     }
 
     public static void main(String[] args) {

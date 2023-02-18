@@ -1,6 +1,7 @@
 package Chess.Figures;
 
 import Chess.Desk.Cell;
+import Chess.Desk.Vector;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.awt.*;
@@ -10,20 +11,23 @@ public class Pawn extends Figure {
     public Pawn(Color color) {
         super("pawn", color);
         if (color == Color.BLACK) {
-            legalCells = new Cell[]{ new Cell(0,-1)};
-            possibleCells = new Cell[]{ new Cell(+1, -1), new Cell(-1, -1), new Cell(0, -2)};
+            legalCells = new Vector[]{ new Vector(0,-1)};
+            possibleCells = new Vector[]{ new Vector(0, -2)};
+            capture = new Vector[]{ new Vector(+1, -1), new Vector(-1, -1)};
         }
         else {
-            legalCells = new Cell[]{ new Cell(0,+1)};
-            possibleCells = new Cell[]{ new Cell(-1, +1), new Cell(+1, +1), new Cell(0, +2)};
+            legalCells = new Vector[]{ new Vector(0,+1)};
+            possibleCells = new Vector[]{new Vector(0, +2)};
+            capture = new Vector[]{ new Vector(-1, +1), new Vector(+1, +1)};
         }
     }
     private boolean isMoved = false;
     private boolean isEnemyOnLeft = false;
     private boolean isEnemyOnRight = false;
 
-    public final Cell[] legalCells;
-    public final Cell[] possibleCells;
+    public final Vector[] legalCells;
+    public final Vector[] possibleCells;
+    public final Vector[] capture;
     @Override
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
         return new Cell[0];
@@ -35,11 +39,31 @@ public class Pawn extends Figure {
 
     @Override
     public void move(Cell cellFrom, Cell cellTo) {
-        Cell vector = cellFrom.getVector(cellTo);
-        if (Arrays.stream(legalCells).anyMatch(c -> c.equals(vector))){
+        var vector = cellFrom.getVector(cellTo);
+        if (Arrays.stream(legalCells).anyMatch(c -> c.equals(vector)) && cellTo.getFigure() == null){
             cellFrom.moveFigure(cellTo);
             isMoved = true;
         }
+        else if (Arrays.stream(capture).anyMatch(c -> c.equals(vector)) && cellTo.getFigure().color != color){
+            cellFrom.moveFigure(cellTo);
+            isMoved = true;
+        }
+        else {
+                if (Arrays.stream(possibleCells).anyMatch(c -> c.equals(vector)) && !isMoved && cellTo.getFigure() == null){
+                cellFrom.moveFigure(cellTo);
+                isMoved = true;
+            }
+        }
+    }
+
+    @Override
+    public void move(Cell[] cells) {
+
+    }
+
+    @Override
+    public Cell[] pathTo(Cell cellFrom, Cell cellTo, Cell[][] board) {
+        return new Cell[0];
     }
 
     public boolean isEnemyOnLeft() {

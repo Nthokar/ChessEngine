@@ -16,9 +16,13 @@ public abstract class Figure {
 
     public abstract Cell[] availableCells() throws ExecutionControl.NotImplementedException;
     public abstract void move(Cell cellFrom, Cell cellTo);
+    public abstract void move(Cell[] cells);
+    public abstract Cell[] pathTo(Cell cellFrom, Cell cellTo, Cell[][] board);
+
 
     @Override
-    public String toString() {
-        return String.valueOf(name.charAt(0));
+    public final String toString() {
+        return color == Color.BLACK ?
+                String.valueOf(name.charAt(0)).toUpperCase() : String.valueOf(name.charAt(0)).toLowerCase();
     }
 }

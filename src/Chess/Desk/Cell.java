@@ -11,8 +11,8 @@ public class Cell {
         this.y = y;
     }
 
-    public Cell getVector(Cell cellTo){
-        return new Cell(cellTo.x - this.x, cellTo.y - this.y);
+    public Vector getVector(Cell cellTo){
+        return new Vector(cellTo.x - this.x, cellTo.y - this.y);
     }
     public Figure getFigure(){
         return figure;
@@ -30,10 +30,15 @@ public class Cell {
     }
     @Override
     public String toString() {
-        return String.format("%s - %s", x, y);
+        return figure == null ? " " : figure.toString();
     }
 
     public boolean equals(Cell cell) {
         return this.x == cell.x && this.y == cell.y;
     }
+
+    public boolean equals(Vector vector) {
+        return this.x == vector.x && this.y == vector.y;
+    }
+
 }
