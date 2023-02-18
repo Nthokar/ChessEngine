@@ -14,5 +14,9 @@ public class Vector{
     public boolean equals(Cell cell) {
         return this.x == (double) cell.x && this.y == (double) cell.y;
     }
+    public Vector getUnitVector(){
+        double maxAbs = Math.max(Math.abs(this.x), Math.abs(this.y));
+        return new Vector(this.x/ maxAbs, this.y/maxAbs);
+    }
 
 }
