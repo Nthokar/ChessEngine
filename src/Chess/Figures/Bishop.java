@@ -8,27 +8,25 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Rook extends Figure{
-    public Rook(Color color) {
-        super("rook", color);
+public class Bishop extends Figure{
+    public Bishop(Color color) {
+        super("bishop", color);
     }
-    public Vector[] legalDirections = new Vector[]{
-            new Vector(0, +1), new Vector(0, -1),
-            new Vector(+1, 0), new Vector(-1, 0),
-    };
+
     @Override
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
         return new Cell[0];
     }
 
+    public Vector[] legalDirections = new Vector[]{
+            new Vector(+1, -1), new Vector(-1, +1),
+            new Vector(+1, +1), new Vector(-1, -1),
+
+    };
+
     @Override
     public void move(Cell cellFrom, Cell cellTo) {
-        Vector vector = cellFrom.getVector(cellTo);
-        double maxAbs = Math.max(Math.abs(vector.x), Math.abs(vector.y));
-        Vector unitVector =  new Vector(vector.x/ maxAbs, vector.y/maxAbs);
-        if (Arrays.stream(legalDirections).anyMatch(v -> v.equals(unitVector))){
-            cellFrom.moveFigure(cellTo);
-        }
+
     }
 
     @Override
@@ -63,5 +61,4 @@ public class Rook extends Figure{
         }
         return new Cell[0];
     }
-
 }

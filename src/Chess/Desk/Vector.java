@@ -8,8 +8,13 @@ public class Vector{
     public final double x;
     public final double y;
 
-    public boolean equals(Vector vector) {
-        return this.x == vector.x && this.y == vector.y;
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Vector)
+            return this.x == ((Vector) o).x && this.y == ((Vector) o).y;
+        if (o instanceof Cell)
+            return this.x == ((Cell) o).x && this.y == ((Cell) o).y;
+        return false;
     }
     public boolean equals(Cell cell) {
         return this.x == (double) cell.x && this.y == (double) cell.y;

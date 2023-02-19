@@ -1,9 +1,6 @@
 package Chess.Desk;
 
-import Chess.Figures.Figure;
-import Chess.Figures.Knight;
-import Chess.Figures.Pawn;
-import Chess.Figures.Rook;
+import Chess.Figures.*;
 
 import java.awt.*;
 
@@ -19,11 +16,6 @@ public class Desk {
     }
 
     public void print(){
-//        String[][] cells = new String[8][8];
-//        for (var cell:this.cells){
-//            cells[cell.x - 1][cell.y - 1] = cell.getFigure() == null ? " "://String.format("%s,%s",cell.x,cell.y) :
-//                    cell.getFigure().color == Color.WHITE ? cell.getFigure().toString() : cell.getFigure().toString().toUpperCase();
-//        }
         for (int i = 7; i >= 0; i--){
             System.out.println("+-----+-----+-----+-----+-----+-----+-----+-----+");
             System.out.print("|");
@@ -54,6 +46,9 @@ public class Desk {
             cells[j][i].setFigure(new Pawn(Color.BLACK));
         }
         cells[0][0].setFigure(new Rook(Color.WHITE));
+        cells[1][0].setFigure(new Knight(Color.WHITE));
+        cells[2][0].setFigure(new Bishop(Color.WHITE));
+        cells[3][0].setFigure(new Queen(Color.WHITE));
         return cells;
     }
 }

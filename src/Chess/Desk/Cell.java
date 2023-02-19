@@ -2,10 +2,13 @@ package Chess.Desk;
 
 import Chess.Figures.Figure;
 
+import java.util.ArrayList;
+
 public class Cell {
     private Figure figure;
     public final int x;
     public final int y;
+    public ArrayList<Cell> attackingPieces = new ArrayList<Cell>();
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
@@ -23,8 +26,6 @@ public class Cell {
         cellTo.figure = figure;
         this.figure = null;
     }
-
-
     public void setFigure(Figure figure){
         this.figure = figure;
     }
@@ -32,13 +33,13 @@ public class Cell {
     public String toString() {
         return figure == null ? " " : figure.toString();
     }
-
-    public boolean equals(Cell cell) {
-        return this.x == cell.x && this.y == cell.y;
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Cell)
+            return this.x == ((Cell) o).x && this.y == ((Cell) o).y;
+        return false;
     }
-
     public boolean equals(Vector vector) {
         return this.x == vector.x && this.y == vector.y;
     }
-
 }
