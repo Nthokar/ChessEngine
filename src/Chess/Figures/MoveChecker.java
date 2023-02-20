@@ -4,15 +4,35 @@ import Chess.Desk.Cell;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class MoveChecker {
-    public MoveChecker(Cell[] cells){
-        this.cells = cells;
+    public MoveChecker(Cell[][] board){
+        this.board = board;
     }
-    public Cell[] cells;
-    public Cell[] UpperLeftDiagonal(Cell cell){
+    public Cell[][] board;
+    public Cell[] upperLeftDiagonal(Cell cell){
+        return CellsInDirection(cell, -1, +1);
+    }
+    public Cell[] upperRightDiagonal(Cell cell){
         return CellsInDirection(cell, +1, +1);
+    }
+    public Cell[] downLeftDiagonal(Cell cell){
+        return CellsInDirection(cell, -1, -1);
+    }
+    public Cell[] downRightDiagonal(Cell cell){
+        return CellsInDirection(cell, +1,-1);
+    }
+    public Cell[] rightHorizontal(Cell cell){
+        return CellsInDirection(cell, +1, 0);
+    }
+    public Cell[] leftHorizontal(Cell cell){
+        return CellsInDirection(cell, -1, 0);
+    }
+    public Cell[] upperVertical (Cell cell){
+        return CellsInDirection(cell, 0, +1);
+    }
+    public Cell[] downVertical(Cell cell){
+        return CellsInDirection(cell, 0, -1);
     }
 
     public Cell[] CellsInDirection(Cell cell, int dx, int dy){
@@ -20,16 +40,16 @@ public class MoveChecker {
         if (isMovePossible(cell, newCell)){
             var raisedArray = new ArrayList<Cell>();
             raisedArray.add(cell);
-            raisedArray.addAll(Arrays.asList(UpperLeftDiagonal(newCell)));
+            raisedArray.addAll(Arrays.asList(upperLeftDiagonal(newCell)));
             return raisedArray.toArray(Cell[]::new);
         }
         return new Cell[]{cell};
     }
 
     public boolean isMovePossible(Cell cellFrom, Cell cellTo){
-        if (Arrays.stream(cells).anyMatch(c -> c.equals(cellTo)) && cellTo.getFigure() == null){
+        if (Arrays.stream(board).anyMatch(c -> c.equals(cellTo)) && cellTo.getFigure() == null){
             return true;
         }
         return false;
-    }
+    }//
 }

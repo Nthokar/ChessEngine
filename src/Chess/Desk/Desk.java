@@ -11,8 +11,10 @@ public class Desk {
     //  EXAMPLE 1,1;default;;
     //  cell-color default means colors determine by cell even
     public Cell[][] cells;
+    public final MoveChecker moveChecker;
     public Desk(Cell[][] cells){
         this.cells = cells;
+        this.moveChecker = new MoveChecker(cells);
     }
 
     public void print(){
