@@ -1,12 +1,14 @@
 package Chess.Figures;
 
 import Chess.Desk.Cell;
+import Chess.Desk.MoveChecker;
 import Chess.Desk.Vector;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 public class Bishop extends Figure{
     public Bishop(Color color) {
@@ -17,12 +19,16 @@ public class Bishop extends Figure{
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
         return new Cell[0];
     }
-
     public Vector[] legalDirections = new Vector[]{
             new Vector(+1, -1), new Vector(-1, +1),
             new Vector(+1, +1), new Vector(-1, -1),
 
     };
+    public static final Set<String> Directions = Set.of(
+            "upperLeftDiagonal",
+            "upperRightDiagonal",
+            "downLeftDiagonal",
+            "downRightDiagonal");
 
     @Override
     public void move(Cell cellFrom, Cell cellTo) {

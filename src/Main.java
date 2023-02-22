@@ -1,10 +1,6 @@
-import Chess.Figures.MoveChecker;
-
 import Chess.Desk.*;
-import Chess.Figures.Pawn;
 import Chess.Parser.ConsoleMoveReader;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {

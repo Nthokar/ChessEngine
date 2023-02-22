@@ -4,8 +4,6 @@ import Chess.Figures.*;
 
 import java.awt.*;
 
-import java.util.HashMap;
-
 public class Desk {
     //  (x,y;cell-color;figure)
     //  EXAMPLE 1,1;default;;
