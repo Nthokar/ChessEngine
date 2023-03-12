@@ -14,6 +14,21 @@ public class Bishop extends Figure{
     public Bishop(Color color) {
         super("bishop", color);
     }
+    public Bishop copy(){
+        return new Bishop(this.color);
+    }
+    private final Set<Vector> Cells = Set.of();
+    private final Set<Vector> Directions = Set.of(
+            MoveChecker.Directions.get("upperLeftDiagonal"),
+            MoveChecker.Directions.get("upperRightDiagonal"),
+            MoveChecker.Directions.get("downLeftDiagonal"),
+            MoveChecker.Directions.get("downRightDiagonal"));
+    public Set<Vector> getCells() {
+        return Cells;
+    }
+    public Set<Vector> getDirections() {
+        return Directions;
+    }
 
     @Override
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
@@ -24,11 +39,6 @@ public class Bishop extends Figure{
             new Vector(+1, +1), new Vector(-1, -1),
 
     };
-    public static final Set<String> Directions = Set.of(
-            "upperLeftDiagonal",
-            "upperRightDiagonal",
-            "downLeftDiagonal",
-            "downRightDiagonal");
 
     @Override
     public void move(Cell cellFrom, Cell cellTo) {

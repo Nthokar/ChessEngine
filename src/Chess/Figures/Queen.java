@@ -1,25 +1,48 @@
 package Chess.Figures;
 
 import Chess.Desk.Cell;
+import Chess.Desk.MoveChecker;
 import Chess.Desk.Vector;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 public class Queen extends Figure{
     public Queen(Color color) {
         super("queen", color);
     }
-
     public Vector[] legalDirections = new Vector[]{
             new Vector(0, +1), new Vector(0, -1),
             new Vector(+1, 0), new Vector(-1, 0),
             new Vector(+1, -1), new Vector(-1, +1),
             new Vector(+1, +1), new Vector(-1, -1),
-
     };
+    private final Set<Vector> Cells = Set.of();
+    private final Set<Vector> Directions = Set.of(
+            MoveChecker.Directions.get("upperLeftDiagonal"),
+            MoveChecker.Directions.get("upperRightDiagonal"),
+            MoveChecker.Directions.get("downLeftDiagonal"),
+            MoveChecker.Directions.get("downRightDiagonal"),
+            MoveChecker.Directions.get("rightHorizontal"),
+            MoveChecker.Directions.get("leftHorizontal"),
+            MoveChecker.Directions.get("upperVertical"),
+            MoveChecker.Directions.get("downVertical"));
+
+    @Override
+    public Figure copy() {
+        return new Queen(this.color);
+    }
+
+    public Set<Vector> getCells() {
+        return Cells;
+    }
+    public Set<Vector> getDirections() {
+        return Directions;
+    }
+
     @Override
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
         return new Cell[0];

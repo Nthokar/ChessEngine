@@ -1,11 +1,13 @@
 package Chess.Figures;
 
 import Chess.Desk.Cell;
+import Chess.Desk.MoveChecker;
 import Chess.Desk.Vector;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Set;
 
 public class Knight extends Figure{
     public Knight(Color color) {
@@ -16,7 +18,31 @@ public class Knight extends Figure{
         new Vector(+2, +1), new Vector(+2, -1),
         new Vector(-2, +1), new Vector(-2, -1),
         new Vector(+1, +2), new Vector(+1, -2),
-        new Vector(-1, +2), new Vector(-1, -2) };;
+        new Vector(-1, +2), new Vector(-1, -2) };
+
+    private final Set<Vector> Cells = Set.of(
+            MoveChecker.Cells.get("knightUpLeft"),
+            MoveChecker.Cells.get("knightUpRight"),
+            MoveChecker.Cells.get("knightDownLeft"),
+            MoveChecker.Cells.get("knightDownRight"),
+            MoveChecker.Cells.get("knightLeftUp"),
+            MoveChecker.Cells.get("knightRightUp"),
+            MoveChecker.Cells.get("knightLeftDown"),
+            MoveChecker.Cells.get("knightRightDown")
+    );
+    private final Set<Vector> Directions = Set.of();
+
+    @Override
+    public Figure copy() {
+        return new Knight(this.color);
+    }
+
+    public Set<Vector> getCells() {
+        return Cells;
+    }
+    public Set<Vector> getDirections() {
+        return Directions;
+    }
 
     @Override
     public Cell[] availableCells() throws ExecutionControl.NotImplementedException {
@@ -50,5 +76,11 @@ public class Knight extends Figure{
             return new Cell[]{cellFrom, cellTo};
         }
         return new Cell[0];
+    }
+
+    @Override
+    public String toString() {
+        return color == Color.BLACK ?
+                String.valueOf(name.charAt(1)).toUpperCase() : String.valueOf(name.charAt(1)).toLowerCase();
     }
 }

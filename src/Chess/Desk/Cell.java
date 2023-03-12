@@ -6,14 +6,20 @@ import java.util.ArrayList;
 
 public class Cell {
     private Figure figure;
+
     public final int x;
     public final int y;
-    public ArrayList<Cell> attackingPieces = new ArrayList<Cell>();
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
     }
 
+    public Cell copy(){
+        var c = new Cell(this.x, this.y);
+        if (getFigure() != null)
+            c.setFigure(getFigure().copy());
+        return c;
+    }
     public Vector getVector(Cell cellTo){
         return new Vector(cellTo.x - this.x, cellTo.y - this.y);
     }
