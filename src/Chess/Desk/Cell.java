@@ -1,10 +1,16 @@
 package Chess.Desk;
 
 import Chess.Figures.Figure;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
+/*
+Класс клетки поля, отвечает за хранение данных клетки(ее местоположение на пооле, и фигура которая на ней стоит)
 
+ */
 public class Cell {
+    @Setter
+    @Getter
     private Figure figure;
 
     public final int x;
@@ -13,27 +19,23 @@ public class Cell {
         this.x = x;
         this.y = y;
     }
-
+    //метод копирования клетки
     public Cell copy(){
         var c = new Cell(this.x, this.y);
         if (getFigure() != null)
             c.setFigure(getFigure().copy());
         return c;
     }
+    //вычисляет вектор до клетки
     public Vector getVector(Cell cellTo){
         return new Vector(cellTo.x - this.x, cellTo.y - this.y);
     }
-    public Figure getFigure(){
-        return figure;
-    }
+    //переставляет фигуру в клетку
     public void moveFigure(Cell cellTo){
         if (cellTo.equals(this))
             return;
         cellTo.figure = figure;
         this.figure = null;
-    }
-    public void setFigure(Figure figure){
-        this.figure = figure;
     }
     @Override
     public String toString() {
@@ -41,11 +43,10 @@ public class Cell {
     }
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Cell)
-            return this.x == ((Cell) o).x && this.y == ((Cell) o).y;
+        if (o instanceof Vector vector)
+            return this.x == vector.x && this.y == vector.y;
+        if (o instanceof Cell cell)
+            return this.x == cell.x && this.y == cell.y;
         return false;
-    }
-    public boolean equals(Vector vector) {
-        return this.x == vector.x && this.y == vector.y;
     }
 }

@@ -66,7 +66,6 @@ public class Rook extends Figure{
         }
         cells[0].moveFigure(cells[cells.length - 1]);
     }
-
     @Override
     public Cell[] pathTo(Cell cellFrom, Cell cellTo, Cell[][] board){
         Vector vector = cellFrom.getVector(cellTo);

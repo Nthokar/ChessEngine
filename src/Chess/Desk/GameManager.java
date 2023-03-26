@@ -5,6 +5,7 @@ import Chess.Parser.ConsoleMoveReader;
 import java.awt.*;
 import java.io.InputStream;
 
+//главный класс партии. Отвечает за инициализацию пвртии, и ее проведение.
 public class GameManager {
     public GameManager(InputStream stream){
         cmr = new ConsoleMoveReader(stream);
@@ -21,7 +22,6 @@ public class GameManager {
             turn(cmr.readMove());
         }
     }
-
     public void turn(Move move){
         try {
             var cell = move.from;

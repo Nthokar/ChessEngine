@@ -10,8 +10,8 @@ public class MoveChecker {
         this.desk = desk;
         this.board = desk.cells;
     }
-    public Desk desk;
-    public Cell[][] board;
+    public final Desk desk;
+    public final Cell[][] board;
     public Cell[] CellsInDirection(Cell cell, Vector vector){
         int x = Math.round((float) (cell.x + vector.x)) - 1;
         int y = Math.round((float) (cell.y +  vector.y)) - 1;
@@ -26,11 +26,6 @@ public class MoveChecker {
                 return new Cell[]{newCell};
         }
         return new Cell[0];
-    }
-
-    public boolean isMovePossible(Cell cellFrom, Cell cellTo){
-        //
-        return false;
     }
     public Cell[] pathTo(Cell cellFrom, Cell cellTo) {
         cellFrom = board[cellFrom.x - 1][cellFrom.y - 1];

@@ -5,15 +5,20 @@ import Chess.Figures.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/*
+класс для хранения данных осостоянии дооски и их преобразования.
+ */
 public class Desk {
     //  (x,y;cell-color;figure)
     //  EXAMPLE 1,1;default;;
     //  cell-color default means colors determine by cell even
     public final Cell[][] cells;
+    //ширина доски в клетках
     public int xLength(){
         return cells.length;
     }
     private int _yLength = -1;
+    //длина доски
     public int yLength(){
         if (_yLength != -1)
             return _yLength;
@@ -26,8 +31,7 @@ public class Desk {
     }
 
     private Cell[] whites;
-    private Cell[] blacks;
-
+    //клетки с белыми фигурами
     public Cell[] getWhites(){
         ArrayList<Cell> _whites = new ArrayList<>();
         for (var i:cells){
@@ -39,6 +43,9 @@ public class Desk {
         whites = _whites.toArray(new Cell[0]);
         return whites;
     }
+
+    private Cell[] blacks;
+    //клеки с чрными фигурами
     public Cell[] getBlacks(){
         ArrayList<Cell> _blacks = new ArrayList<>();
         for (var i:cells){
